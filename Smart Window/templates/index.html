@@ -1,5 +1,4 @@
 <!doctype html>
-<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -35,14 +34,12 @@
            // document.getElementById("result").innerHTML = positionInfo;
              $.ajax({
                 type: "POST",
-                url: "/getdata",
+                url: "/get_geolocation_data",
                 contentType: "application/json",
                 data: JSON.stringify({loc: positionInfo}),
                 dataType: "json",
                 success: function(response) {
-                    $('.data1').html(response.museums[0]+', <br>'+response.museums_distance[0] + ', <br>'+response.museums[1]+',<br> '+response.museums_distance[1]+',<br>' +response.museums[2]+',<br> '+response.museums_distance[2]);
-                    $('.data3').html('latitude = '+response.lat+', longitude='+ response.long+'<br>'+response.current_loc[0]+', '+response.current_loc[1]);
-                    $('.data2').html(response.landmarks[0]+', <br> distance = '+response.landmarks_distance[0] + ', <br>'+response.landmarks[1]+', <br>  distance = ' +response.landmarks_distance[1] );
+
                     console.log(response);
                 },
                 error: function(err) {
@@ -56,37 +53,63 @@
     // Initialise the whole system (above)
     window.onload = showPosition;
     </script>
-    <title>Live Streaming </title>
+
 </head>
 <body>
 
 <h5>Live Streaming</h5>
 
 <div class="container">
-    <img src="{{ url_for('video_feed') }}" width="1280px" height="720px">
-    <p class="data1" id="museums" style="color:blue">
 
-    </p>
-    <p class="data2" id = "landmarks" style="color:blue">
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
 
-    </p>
-    <h5 class="data3" id="location" style="color:blue">
-
-    </h5>
-    <button class="btn1">Nearest museums</button>
-    <button class="btn2">Neareart landmarks</button>
 </div>
 
 <script>
-   $(document).ready(function(){
-  $(".btn1").click(function(){
-    $("#museums").slideToggle();
-  });
-   $(".btn2").click(function(){
-    $("#landmarks").slideToggle();
-  });
-  });
+// Elements for taking the snapshot
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('video');
 
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        //video.src = window.URL.createObjectURL(stream);
+        video.srcObject = stream;
+        video.play();
+    });
+}
+
+// Trigger photo take
+ function  data() {
+	context.drawImage(video, 0, 0, 640, 480);
+	var dataURL = canvas.toDataURL('image/jpeg', 1.0);
+	console.log(typeof(dataURL));
+	$.ajax({
+                type: "POST",
+                url: "/get_image_data",
+                contentType: "application/json",
+                data: JSON.stringify({image: dataURL}),
+                dataType: "json",
+                success: function(response) {
+
+                    console.log(response);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+
+
+
+}
+
+$(document).ready(function(){
+ setInterval(data,10000);
+});
 
 </script>
 </body>
