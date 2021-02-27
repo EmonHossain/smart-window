@@ -10,7 +10,7 @@ from PIL import Image # pip  install pillow
 from imageai.Detection import ObjectDetection
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 """ global varible variable """
 image_np = np.array([1, 2, 3, 4, 5])
 
@@ -20,9 +20,8 @@ def webcam():
     """Video streaming home page."""
     return render_template('index.html')
 
-@app.route('/URL_tesing')
-def URL_tesing():
-    """Video streaming home page."""
+"""@app.route('/URL_tesing')
+ def URL_tesing():
     global image_np
     print(image_np)
     print(type(image_np))
@@ -30,7 +29,7 @@ def URL_tesing():
 
 @app.route('/get_image_data', methods=['POST'])
 def get_image_data():
-    """Getting the image data in json form, from the ajax request"""
+
     jsonResponse =  request.get_json()
     json_data= {
         'image': jsonResponse
@@ -53,16 +52,15 @@ def get_image_data():
     detector.loadModel()
     detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path, "image.jpg"),
                                                  output_image_path=os.path.join(execution_path, "imagenew.jpg"))
-
+    print(detections)
     for eachObject in detections:
         print(eachObject["name"], " : ", eachObject["percentage_probability"])
-    return Response(json.dumps(json_data))
+    return Response(json.dumps(json_data))"""
 
 
 
 @app.route('/get_geolocation_data', methods=['POST'])
 def get_geolocation_data():
-    """Getting the data from the ajax request and api"""
     geolocation = request.get_json()
     loc = (str(geolocation['loc'])).split(", ")
     lat = float(loc[0])
@@ -88,17 +86,15 @@ def get_geolocation_data():
     landmark = []
     landmark_distance = []
     museum_distance = []
-    count1 = 0
-    count2 = 0
     for info in data['results']['items']:
-        if (info['category']['id'] == "museum" and count1 < 3):
+        if (info['category']['id'] == "museum" ):
             museum.append(info['title'])
             museum_distance.append((info['distance']))
-            count1 = count1 + 1
-        if (info['category']['id'] == "landmark-attraction" and count2 < 3):
+
+        if (info['category']['id'] == "landmark-attraction" ):
             landmark.append(info['title'])
             landmark_distance.append((info['distance']))
-            count2 = count2 + 1
+
     museums = museum
     landmarks_distance = landmark_distance
     landmarks = landmark
