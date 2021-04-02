@@ -4,6 +4,28 @@ $(document).ready(function () {
 
 
     /*time*/
+	var time = {};
+
+    (function () {
+        var clock = document.getElementById('clock');
+
+        (function tick() {
+            var minutes, d = new Date();
+            time.weekday = d.getDay();
+            time.day = d.getDate();
+            time.month = d.getMonth() + 1; //JS says jan = 0
+            time.year = d.getFullYear();
+            time.minutes = d.getMinutes();
+            time.hours = d.getHours(); //eastern time zone
+            time.seconds = d.getSeconds();
+            time.ms = d.getMilliseconds();
+
+            minutes = (time.minutes < 10 ? '0' + time.minutes : time.minutes);
+            $("#cur-time").text(time.hours + ':' + minutes + ' ' +time.day  + '/' + time.month + '/' + time.year);
+
+            window.setTimeout(tick, 1000);
+        }()); // Note the parens here, we invoke these functions right away
+    }());
 	
 
     $('#info-pos').click(function (event) {
@@ -109,63 +131,6 @@ $(document).ready(function () {
                         }
                     });
 
-
-
-
-                    /*const museums_info_table = document.getElementById("nearest_museums_info_table");
-                    var tableRows = museums_info_table.getElementsByTagName('tr');
-                    var rowCount = tableRows.length;
-
-                    for (var x = rowCount - 1; x >= 0; x--) {
-                        museums_info_table.removeChild(tableRows[x]);
-                    }
-                    for (var i = 0; i < data.museums.length; i++) {
-                        const tr = document.createElement('tr');
-
-                        const td1 = document.createElement('td');
-                        td1.innerText = data.museums[i];
-                        tr.appendChild(td1);
-
-                        const td2 = document.createElement('td');
-                        td2.innerText = data.museums_distance[i];
-                        tr.appendChild(td2);
-
-                        museums_info_table.appendChild(tr);
-
-                    }*/
-                    
-                    //$("#pub-marks").text(data.museums[0]+ ',' +data.museums_distance[0]+'m');
-
-                    /*const landmarks_info_table = document.getElementById("nearest_landmarks_info_table");
-                    tableRows = landmarks_info_table.getElementsByTagName('tr');
-                    rowCount = tableRows.length;
-
-                    for (var x = rowCount - 1; x >= 0; x--) {
-                        landmarks_info_table.removeChild(tableRows[x]);
-                    }
-                    for (var i = 0; i < data.landmarks.length; i++) {
-                        const tr = document.createElement('tr');
-
-                        const td1 = document.createElement('td');
-                        td1.innerText = data.landmarks[i];
-                        tr.appendChild(td1);
-
-                        const td2 = document.createElement('td');
-                        td2.innerText = data.landmarks_distance[i];
-                        tr.appendChild(td2);
-
-                        landmarks_info_table.appendChild(tr);
-
-                    }*/
-                    // fetch request starting here
-
-                    //$("#land-marks").text(data.landmarks[0]+ ',' +data.landmarks_distance[0]+'m');
-                    /*if (data.landmarks[0] == 'Karl-Marx-Monument' && data.landmarks_distance[0]<300){
-                        console.log("image is here............");
-                        $('.poi-img').attr('src','../static/image/cm.png');
-
-                    }*/
-
                     /*fetch('https://api.openweathermap.org/data/2.5/weather?q=' + data.current_loc + '&appid=a7049cdf5b04e184b6314f4c5660b41d').then(
                         function (response) {
                             if (response.status !== 200) {
@@ -203,10 +168,6 @@ $(document).ready(function () {
         }
 
     }
-
-
-
-
 
 });
 
