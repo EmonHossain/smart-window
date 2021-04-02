@@ -14,9 +14,9 @@ This README would normally document whatever steps are necessary to get our appl
 
 ### Contributors ###
 
-* [Emon Hossain](https://gitlab.hrz.tu-chemnitz.de/emon--tu-chemnitz.de) [Email](emon.hossain@s2018.tu-chemnitz.de) 
-* [Md Atikul Islam](https://gitlab.hrz.tu-chemnitz.de/mdis--tu-chemnitz.de)  [Email](md-atikul.islam@s2019.tu-chemnitz.de)
-* [Abdullah-al-noman](https://gitlab.hrz.tu-chemnitz.de/abno--tu-chemnitz.de) [Email](abdullah-al.noman@s2018.tu-chemnitz.de)
+* [Emon Hossain](https://gitlab.hrz.tu-chemnitz.de/emon--tu-chemnitz.de) (emon.hossain@s2018.tu-chemnitz.de)
+* [Md Atikul Islam](https://gitlab.hrz.tu-chemnitz.de/mdis--tu-chemnitz.de)  (md-atikul.islam@s2019.tu-chemnitz.de)
+* [Abdullah-al-noman](https://gitlab.hrz.tu-chemnitz.de/abno--tu-chemnitz.de) (abdullah-al.noman@s2018.tu-chemnitz.de)
 
 ### How do I get set up? ###
 
