@@ -1,12 +1,11 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This README would normally document whatever steps are necessary to get our application up and running.
 
 ### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* This repository belong  to the team SeaQuasar
+* This is a Django web application for Smart Window from planspiel winter semester 2020/21
+* Version 1.0
 
 ### Pre-requisite ###
 
@@ -21,9 +20,10 @@ This README would normally document whatever steps are necessary to get your app
 
 ### How do I get set up? ###
 
-* Run the pip3 install -r "requirements.txt" 
-* Type python3 manage.py runserver
-* Go the browser window and type 127.0.0.1:5000 
+* Download the repository in your local machine 
+* Run the command "pip3 install -r requirements.txt" from the terminal or commmand line interface
+* Run the command "python3 manage.py runserver" from the terminal or command line interface
+* Open a browser window and type 127.0.0.1:5000 
 
 ### Who do I talk to? ###
 
