@@ -27,5 +27,16 @@ image_detector = detector.YOLO()
 def index(request):
     return render(request, 'stream/index.html')
 
+def image_analysis(request):
+    if request.method == "POST":
+        print("this is post")
+        data = json.loads(request.body)
 
+        image = base64.b64decode(str(data.get("img")))
+        img = Image.open(io.BytesIO(image))
+        json_data = image_detector.detect_img(img)
+        # image = 'opera.jpg'
+        # img = Image.open(io.BytesIO(image))
+        # r_image, ObjectsList = image_detector.detect_img(img)
 
+    return JsonResponse(json_data)
